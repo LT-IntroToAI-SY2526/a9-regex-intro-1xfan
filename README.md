@@ -10,8 +10,6 @@ This will be an individual assignment that you will be turning into github class
 
 For this assignment we will be using Itopia each day so that I can get a sense of what works and what doesn't work.  Please be patient with me throughout and if we need more time, then I will be flexible with due dates.  I created two separate classes for each period so when logging onto the Itopia image, make sure you are choosing the correct one.  I am not deleting the other image yet, but probably will in the future.
 
-
-
 The purpose of this assignment is to explore the concept of "regular expressions" (regex) as well as download/install and use some existing python packages.
 
 In this assignment, you will be using a python package that allows you to programmatically gather information from Wikipedia. You will then use regular expressions to attempt to extract specific information from Wikipedia pages (e.g. a person's date of birth).
