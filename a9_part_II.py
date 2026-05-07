@@ -8,6 +8,7 @@ from utilities import *
 
 # Assignment 8 Part II
 
+# NOTE: To stop from being rate limited, I modified the code to save each fetch as a variable.
 
 def get_planet_radius(planet_name: str) -> str:
     """Gets the radius of the given planet
@@ -20,7 +21,7 @@ def get_planet_radius(planet_name: str) -> str:
     """
     infobox_text = clean_text(get_first_infobox_text(get_page_html(planet_name)))
     # TODO: fill this in
-    pattern = "REPLACE ME"
+    pattern = "Polar radius\s*(?P<radius>[\d,\.]+)"
     error_text = "Page infobox has no polar radius information"
     match = get_match(infobox_text, pattern, error_text)
     return match.group("radius")
@@ -37,7 +38,7 @@ def get_birth_date(name: str) -> str:
     """
     infobox_text = clean_text(get_first_infobox_text(get_page_html(name)))
     # TODO: fill this in
-    pattern = "REPLACE ME"
+    pattern = "(?P<birth>\d{4}-\d{2}-\d{2})"
     error_text = (
         "Page infobox has no birth information (at least none in xxxx-xx-xx format)"
     )
@@ -48,38 +49,46 @@ def get_birth_date(name: str) -> str:
 if __name__ == "__main__":
     print("\n<<<<<<<<<<<<<< Testing Planet Radius >>>>>>>>>>>>>>")
     # should be 3376.2
-    print(f'Mars has a polar radius of {get_planet_radius("Mars")}km')
+    mars_radius = get_planet_radius("Mars")
+    print(f'Mars has a polar radius of roughly {mars_radius} km')
     # should be 6356.752
-    print(f'Earth has a polar radius of {get_planet_radius("Earth")}km')
+    earth_radius = get_planet_radius("Earth")
+    print(f'Earth has a polar radius of roughly {earth_radius} km')
     # should be 66854
-    print(f'Jupiter has a polar radius of {get_planet_radius("Jupiter")}km')
+    jupiter_radius = get_planet_radius("Jupiter")
+    print(f'Jupiter has a polar radius of roughly {jupiter_radius} km')
     # should be 54364
-    print(f'Saturn has a polar radius of {get_planet_radius("Saturn")}km')
+    saturn_radius = get_planet_radius("Saturn")
+    print(f'Saturn has a polar radius of roughly {saturn_radius} km')
 
     # uncomment below lines for tests once you think you're getting the right output
-    # print('\n<<<< Running asserts, this might take a sec >>>>')
-    # assert get_planet_radius("Mars") == "3376.2", "Incorrect radius for Mars"
-    # assert get_planet_radius("Earth") == "6356.752", "Incorrect radius for Earth"
-    # assert get_planet_radius("Jupiter") == "66854", "Incorrect radius for Jupiter"
-    # assert get_planet_radius("Saturn") == "54364", "Incorrect radius for Saturn"
-    # print('\n<<<< Planet radius tests passed >>>>')
+    print('\n<<<< Running asserts, this might take a sec >>>>')
+    assert mars_radius == "3376.2", "Incorrect radius for Mars"
+    assert earth_radius == "6356.752", "Incorrect radius for Earth"
+    assert jupiter_radius == "66842", "Incorrect radius for Jupiter"
+    assert saturn_radius == "54364", "Incorrect radius for Saturn"
+    print('\n<<<< Planet radius tests passed >>>>')
 
     print("\n<<<<<<<<<<<<<< Testing Birth Dates >>>>>>>>>>>>>>")
     # should be 1906-12-09
-    print(format_birth(get_birth_date("Grace Hopper"), "Grace Hopper"))
+    grace_hopper_birth = get_birth_date("Grace Hopper")
+    print(format_birth(grace_hopper_birth, "Grace Hopper"))
     # should be 1912-06-23
-    print(format_birth(get_birth_date("Alan Turing"), "Alan Turing"))
+    alan_turing_birth = get_birth_date("Alan Turing")
+    print(format_birth(alan_turing_birth, "Alan Turing"))
     # should be 1955-06-08
-    print(format_birth(get_birth_date("Tim Berners-Lee"), "Tim Berners-Lee"))
+    tim_berners_lee_birth = get_birth_date("Tim Berners-Lee")
+    print(format_birth(tim_berners_lee_birth, "Tim Berners-Lee"))
     # should be 1949-01-17
-    print(format_birth(get_birth_date("Anita Borg"), "Anita Borg"))
+    anita_borg_birth = get_birth_date("Anita Borg")
+    print(format_birth(anita_borg_birth, "Anita Borg"))
 
     # uncomment below lines for tests once you think you're getting the right output
-    # print('\n<<<< Running asserts, this might take a sec >>>>')
-    # assert get_birth_date("Grace Hopper") == "1906-12-09", "Incorrect birth date for Grace Hopper"
-    # assert get_birth_date("Alan Turing") == "1912-06-23", "Incorrect birth date for Alan Turing"
-    # assert get_birth_date("Tim Berners-Lee") == "1955-06-08", "Incorrect birth date for Tim Berners-Lee"
-    # assert get_birth_date("Anita Borg") == "1949-01-17", "Incorrect birth date for Anita Borg"
-    # print('\n<<<< Birth date tests passed >>>>')
+    print('\n<<<< Running asserts, this might take a sec >>>>')
+    assert grace_hopper_birth == "1906-12-09", "Incorrect birth date for Grace Hopper"
+    assert alan_turing_birth == "1912-06-23", "Incorrect birth date for Alan Turing"
+    assert tim_berners_lee_birth == "1955-06-08", "Incorrect birth date for Tim Berners-Lee"
+    assert anita_borg_birth == "1949-01-17", "Incorrect birth date for Anita Borg"
+    print('\n<<<< Birth date tests passed >>>>')
 
-    # print('\n<<<< All tests passed! >>>>')
+    print('\n<<<< All tests passed! >>>>')
